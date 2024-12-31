@@ -90,7 +90,7 @@ $(NAME): $(BUILD_PATH) $(OBJS) $(ZOSC_ARC)	# Compile
 
 exec: all 		## Run
 	@echo "$(YEL)Running $(MAG)$(EXEC)$(YEL)$(D)"
-	./$(EXEC) $(ARG)
+	./$(NAME) $(ARG)
 
 export CXXFLAGS
 debug: CXXFLAGS += $(DEBUG_FLAGS)
@@ -136,23 +136,23 @@ test_all:						## Run All tests
 
 ##@ Debug Rules 
 
-gdb: debug $(EXEC) $(TEMP_PATH)			## Debug w/ gdb
-	tmux split-window -h "gdb --tui --args ./$(EXEC)"
+gdb: debug $(NAME) $(TEMP_PATH)			## Debug w/ gdb
+	tmux split-window -h "gdb --tui --args ./$(NAME)"
 	tmux resize-pane -L 5
 	# tmux split-window -v "btop"
 	make get_log
 
 vgdb: debug $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
-	tmux split-window -h "valgrind $(VGDB_ARGS) --log-file=gdb.txt ./$(EXEC) $(ARG)"
+	tmux split-window -h "valgrind $(VGDB_ARGS) --log-file=gdb.txt ./$(NAME) $(ARG)"
 	make vgdb_cmd
-	tmux split-window -v "gdb --tui -x $(TEMP_PATH)/gdb_commands.txt $(EXEC)"
+	tmux split-window -v "gdb --tui -x $(TEMP_PATH)/gdb_commands.txt $(NAME)"
 	tmux resize-pane -U 18
 	# tmux split-window -v "btop"
 	make get_log
 
-valgrind: debug $(EXEC) $(TEMP_PATH)			## Debug w/ valgrind (memcheck)
+valgrind: debug $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck)
 	tmux set-option remain-on-exit on
-	tmux split-window -h "valgrind $(VAL_LEAK) $(VAL_FD) ./$(EXEC) $(ARG)"
+	tmux split-window -h "valgrind $(VAL_LEAK) $(VAL_FD) ./$(NAME) $(ARG)"
 
 massif: all $(TEMP_PATH)		## Run Valgrind w/ Massif (gather profiling information)
 	@TIMESTAMP=$(shell date +%Y%m%d%H%M%S); \
