@@ -58,6 +58,8 @@ CXXFLAGS	  += -Wshadow
 
 DEBUG_FLAGS	= -g -O0 -D DEBUG
 
+ASAN_FLAGS	= -fsanitize=address,undefined
+
 INC					= -I $(INC_PATH)
 
 #==============================================================================#
@@ -99,6 +101,12 @@ rexec: re 		## Re & Run
 export CXXFLAGS
 debug: CXXFLAGS += $(DEBUG_FLAGS)
 debug: fclean $(TEMP_PATH) all 		## Compile w/ debug symbols
+
+asan: CXXFLAGS += $(ASAN_FLAGS) 
+asan: $(BUILD_PATH) $(ZOSC_ARC) $(OBJS)   ## Compile with Sanitizers
+	@echo "$(YEL)Compiling $(MAG)$(NAME)$(YEL) with Address Sanitizer$(D)"
+	$(CXX) $(CXXFLAGS) $(OBJS) $(INC) $(ZOSC_ARC) -o $(NAME)
+	@echo "[$(_SUCCESS) compiling $(MAG)$(NAME)$(D) with Sanitizers $(YEL)🖔$(D)]"
 
 deps:		## Download/Update deps
 	@if test ! -d "$(ZOSC_PATH)"; then make get_zosc; \
