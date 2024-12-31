@@ -5,7 +5,6 @@
  * @{
  */
 
-#include "../inc/zosc_logger.hpp"
 #include "../lib/zosc/inc/Zosc.hpp"
 #include <cstdlib>
 
