@@ -1,6 +1,14 @@
 # Prerequisites
 *.d
 
+# Libs
+lib/
+
+# Temp
+.build/
+.cache/
+.temp/
+
 # Compiled Object files
 *.slo
 *.lo
@@ -15,6 +23,7 @@
 *.so
 *.dylib
 *.dll
+compile_commands.json
 
 # Fortran module files
 *.mod
