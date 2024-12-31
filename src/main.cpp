@@ -9,9 +9,8 @@
 #include "../lib/zosc/inc/Zosc.hpp"
 #include <cstdlib>
 
-#define VERSION "0.0.1"
+#define VERSION "1.0.0"
 #define NAME "osc_logger"
-#define BUF_SIZE 2048
 #define MAX_PORTS 65535
 #define PORT 9000
 
@@ -20,6 +19,7 @@ static volatile bool _listening = true;
 
 static void SIGINT_handler(int sig);
 
+/// @brief Main entry point
 int main(int argc, char **argv) {
 	int port = PORT;
 
@@ -59,14 +59,16 @@ int main(int argc, char **argv) {
 	// SIGINT handler
 	signal(SIGINT, &SIGINT_handler);
 
-	// Setup UDP Listeing
+	// Setup UDP Listening
 	ZoscReceiver receiver(port);
 	receiver.setMessageCallback([](const ZoscMessage &message) {
 		printf("Got msg from :" YEL " %s\n" NC, message.getAddress().c_str());
 	});
+
 	while (_listening) {
 		receiver.start();
 	}
+
 	receiver.stop();
 	printf("Closing " BGRN "%s " NC "%s\n", NAME, VERSION);
 
