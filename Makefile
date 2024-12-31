@@ -92,6 +92,10 @@ exec: all 		## Run
 	@echo "$(YEL)Running $(MAG)$(EXEC)$(YEL)$(D)"
 	./$(NAME) $(ARG)
 
+rexec: re 		## Re & Run
+	@echo "$(YEL)Running $(MAG)$(EXEC)$(YEL)$(D)"
+	./$(NAME) $(ARG)
+
 export CXXFLAGS
 debug: CXXFLAGS += $(DEBUG_FLAGS)
 debug: fclean $(TEMP_PATH) all 		## Compile w/ debug symbols
