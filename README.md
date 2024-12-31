@@ -1,19 +1,19 @@
 # OSC Logger (zosc_logger)
 
-## Overview
+## Overview 🔎
 `zosc_logger` is a simple and efficient application in C++ for logging Open Sound Control (OSC) messages. Built using the `zosc` library, it facilitates easy monitoring of OSC traffic over UDP.
 
-## Features
+## Features 🚀
 - Logs incoming OSC messages from a specified UDP port.
 - Customizable port selection with warnings for reserved ranges.
 - Handles SIGINT (Ctrl+C) for graceful shutdown.
 
-## Requirements
+## Requirements 📚
 - C++17 or later
 - [zosc](https://github.com/PedroZappa/zosc) library
 - A system with signal handling capabilities (e.g., Linux, macOS, or Windows Subsystem for Linux)
 
-## Installation
+## Installation 📦
 
 1. Clone the repository:
    ```bash
@@ -31,7 +31,7 @@
    ./zosc_logger [PORT]
    ```
 
-## Usage
+## Usage 🔧 
 
 - To start the logger with the default port (9000):
   ```bash
