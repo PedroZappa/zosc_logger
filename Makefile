@@ -16,7 +16,7 @@ ARG				=
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME				= zosc_logger
+NAME				= zosc_logger.out
 
 ### Message Vars
 _NAME	 		= [$(MAG)$(NAME)$(D)]
@@ -88,14 +88,13 @@ $(NAME): $(BUILD_PATH) $(OBJS) $(ZOSC_ARC)	# Compile
 	$(BEAR_CMD) $(CXX) $(CXXFLAGS) $(OBJS) $(INC) $(ZOSC_ARC) -o $(NAME)
 	@echo "* $(_NAME) archived: $(_SUCCESS) $(YEL)🖔$(D)"
 
-exec: $(NAME) 		## Run
+exec: all 		## Run
 	@echo "$(YEL)Running $(MAG)$(EXEC)$(YEL)$(D)"
 	./$(EXEC) $(ARG)
 
 export CXXFLAGS
 debug: CXXFLAGS += $(DEBUG_FLAGS)
-debug: fclean $(TEMP_PATH) $(NAME) 		## Compile w/ debug symbols
-
+debug: fclean $(TEMP_PATH) all 		## Compile w/ debug symbols
 
 deps:		## Download/Update deps
 	@if test ! -d "$(ZOSC_PATH)"; then make get_zosc; \
@@ -127,7 +126,7 @@ $(TEMP_PATH):
 	@echo "* $(YEL)Creating $(CYA)$(TEMP_PATH)$(YEL) folder:$(D) $(_SUCCESS)"
 
 $(ZOSC_ARC):
-	$(MAKE) $(ZOSC_PATH)
+	$(MAKE) $(ZOSC_PATH) debug
 
 ##@ Test Rules 🧪
 
