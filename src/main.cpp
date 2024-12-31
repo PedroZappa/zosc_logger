@@ -7,15 +7,7 @@
 
 #include "../inc/zosc_logger.hpp"
 #include "../lib/zosc/inc/Zosc.hpp"
-
-#ifdef __linux__
-#include <asm-generic/socket.h>
-#elif defined(__APPLE__)
-#include <sys/socket.h> // macOS-specific headers
-#endif
-
-#include <sys/select.h>
-#include <sys/socket.h>
+#include <cstdlib>
 
 #define VERSION "0.0.1"
 #define NAME "osc_logger"
