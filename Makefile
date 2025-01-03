@@ -45,7 +45,7 @@ OBJS			= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)
 TEST_SRC		= $(addprefix ./, $(TEST_FILES))
 TEST_OBJS		= $(TEST_SRC:$(TEST_PATH)/%.cpp=$(BUILD_PATH)/%.o)
 
-ZOSC_PATH		= $(LIBS_PATH)/zosc
+ZOSC_PATH		= $(LIBS_PATH)/zosclib
 ZOSC_ARC		= $(ZOSC_PATH)/zosclib.a
 
 #==============================================================================#
@@ -109,17 +109,17 @@ asan: $(BUILD_PATH) $(ZOSC_ARC) $(OBJS)   ## Compile with Sanitizers
 	@echo "[$(_SUCCESS) compiling $(MAG)$(NAME)$(D) with Sanitizers $(YEL)🖔$(D)]"
 
 deps:		## Download/Update deps
-	@if test ! -d "$(ZOSC_PATH)"; then make get_zosc; \
-		else echo "$(YEL)zosc$(D) folder found 🖔"; fi
+	@if test ! -d "$(ZOSC_PATH)"; then make get_zosclib; \
+		else echo "$(YEL)zosclib$(D) folder found 🖔"; fi
 	@echo " $(RED)$(D) [$(GRN)Nothing to be done!$(D)]"
 
-get_zosc:
-	@echo "* $(CYA)Getting $(YEL)zosc$(CYA) submodule$(D)]"
+get_zosclib:
+	@echo "* $(CYA)Getting $(YEL)zosclib$(CYA) submodule$(D)]"
 	@if test ! -d "$(ZOSC_PATH)"; then \
-		git clone git@github.com:PedroZappa/zosc.git $(ZOSC_PATH); \
-		echo "* $(GRN)zosc submodule download$(D): $(_SUCCESS)"; \
+		git clone git@github.com:PedroZappa/zosclib.git $(ZOSC_PATH); \
+		echo "* $(GRN)zosclib submodule download$(D): $(_SUCCESS)"; \
 	else \
-		echo "* $(GRN)zosc submodule already exists 🖔"; \
+		echo "* $(GRN)zosclib submodule already exists 🖔"; \
 	echo " $(RED)$(D) [$(GRN)Nothing to be done!$(D)]"; \
 	fi
 

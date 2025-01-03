@@ -5,12 +5,11 @@
  * @{
  */
 
-#include "../lib/zosc/inc/Zosc.hpp"
+#include "../lib/zosclib/inc/Zosc.hpp"
 #include <cstdlib>
-// #include <boost/asio.hpp>
 
-#define VERSION "1.0.0"
 #define NAME "osc_logger"
+#define VERSION "1.0.0"
 #define MAX_PORTS 65535
 #define PORT 9000
 
@@ -62,7 +61,7 @@ int main(int argc, char **argv) {
 	// Setup UDP Listening
 	ZoscReceiver receiver(port);
 	receiver.setMessageCallback([](const ZoscMessage &message) {
-		printf("Got msg from :" YEL " %s\n" NC, message.getAddress().c_str());
+		printf("Got msg from: " YEL "%s\n" NC, message.getAddress().c_str());
 	});
 
 	while (_listening) {
