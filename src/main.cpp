@@ -60,8 +60,17 @@ int main(int argc, char **argv) {
 
 	// Setup UDP Listening
 	ZoscReceiver receiver(port);
-	receiver.setMessageCallback([](const ZoscMessage &message) {
-		printf("Got msg from: " YEL "%s\n" NC, message.getAddress().c_str());
+	// receiver.setMessageCallback([](const ZoscMessage &message) {
+	// 	printf("Got msg from: " YEL "%s\n" NC, message.getAddress().c_str());
+	// });
+
+	receiver.setMessageCallback([&](const ZoscMessage &msg,
+								   const std::string &senderIP,
+								   uint16_t senderPort) {
+		std::cout << "Received message from " << senderIP << ":" << senderPort
+				  << ": " YEL << msg.getAddress() << std::endl;
+		for (const auto &arg : msg.getArgs())
+			std::cout << GRN "  " << arg << NC << std::endl;
 	});
 
 	while (_listening) {
